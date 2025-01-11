@@ -78,3 +78,4 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Status Code API is running on http://localhost:${PORT}`);
 });
+
