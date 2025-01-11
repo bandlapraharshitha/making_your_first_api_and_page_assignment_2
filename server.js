@@ -1,5 +1,5 @@
 // Boilerplate Code for HTTP Status Code API
-const express = require('express');
+const express = require("express");
 const app = express();
 
 /*
@@ -50,7 +50,31 @@ List of Status Codes to Handle:
 200, 201, 204, 400, 401, 403, 404, 405, 429, 500, 502, 503, 504
 */
 
+app.get("/status-info", (req, res) => {
+  const code = req.query.code;
+  const statusCodes = {
+    200: "OK: The request has succeeded. The meaning of this status depends on the HTTP method used.",
+    201: "Created: The request has been fulfilled and resulted in one or more new resources",
+    204: "No Content: The server successfully processed the request and is not returning any content",
+    400: "Bad Request: The server cannot process the request due to client-side errors",
+    401: "Unauthorized: The request has not been applied because it lacks valid authentication credentials",
+    403: "Forbidden: The server understood the request but refuses to authorize it",
+    404: "Not Found: The server has not found anything matching the request URI",
+    405: "Method Not Allowed: The method received in the request is known by the server",
+    429: "Too Many Requests: The user has sent too many requests in a given amount",
+    500: "Internal Server Error: The server encountered an unexpected condition that prevented it from fulfilling",
+    502: "Bad Gateway: The server, while acting as a gateway or proxy, received an invalid response",
+    503: "Service Unavailable: The server is currently unable to handle the request",
+    504: "Gateway Timeout: The server, while acting as a gateway or proxy",
+  };
+  const responce = {
+    status: code,
+    Message: statusCodes[code],
+  };
+  res.send(responce);
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`Status Code API is running on http://localhost:${PORT}`);
+  console.log(`Status Code API is running on http://localhost:${PORT}`);
 });
